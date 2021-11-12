@@ -46,10 +46,10 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String password = edt_password_sign_up.getText().toString();
                 if(password.length() < 8 && !isValidPassword(password)){
-                    Toast.makeText(SignUpActivity.this, "@string/txt_invalid_password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, getResources().getString(R.string.txt_invalid_password), Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(SignUpActivity.this, "@string/txt_valid_password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, getResources().getString(R.string.txt_valid_password), Toast.LENGTH_SHORT).show();
                 }
             }
         });

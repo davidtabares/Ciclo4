@@ -6,6 +6,8 @@
     <string name="txt_password">Password</string>
     <string name="txt_login">Login</string>
     <string name="txt_sign_up">Sign Up</string>
+    <string name="txt_logged">You are logged in</string>
+    <string name="txt_login_error">Login error</string>
 
     <!-- Strings Sign Up -->
     <string name="txt_first_name">First Name</string>
@@ -22,41 +24,54 @@
 
     <!-- Strings Sign Up -->
     <string name="txt_terms_title">Terms and Conditions Policy</string>
-    <string name="txt_terms_activity">
-        General terms and conditions of use of the Marketplace
-        DIGITAL WORLD. is a commercial company domiciled in the Republic of Colombia that
-        makes available on its website www.digitalworl.com/ ("The Site" or "digitalworld.com")
-        a platform ("Marketplace"), which allows the exhibition and commercialization of goods
-        and/or services ("the Products") by national or international sellers acting in their
-        personal capacity and therefore independent from DIGITAL WORLD ("the Sellers"), for the
-        online acquisition of the same by consumers ("Customers" or "Users").
-        DIGITAL WORLD is therefore not a distributor of the Products offered by the Sellers, does
-        not have any contractual position within the transaction made between Customers and Sellers,
-        nor can it be qualified as a reseller of the products offered by the Sellers in the Marketplace.
-
-        Scope of application of the Terms of Use
-        The present general conditions of use of the Marketplace ("Conditions of Use") apply to all
-        orders of Products made by the Users to the Sellers of the Marketplace. The applicable Terms of
-        Use are those in force at the time the order is placed by the User. Likewise, the Seller by the
-        mere fact of exhibiting the Products in the Marketplace confirms the understanding and
-        unconditionally accepts the application of the same.
-
-        Capacity to use the platform
-        The services offered in the Marketplace may only be used by persons who have legal capacity to
-        contract in accordance with the provisions of the Colombian legislation in force.
-
-        Purchase Process
-        The Users can order the Products offered in the Marketplace directly and independently by the
-        Sellers, which can be clearly identified by a mark in the description of the same or by the
-        expression "Sold by". The description of the Products is provided by the Sellers, who are
-        therefore solely responsible for the completeness of the description provided and the conformity
-        of the Products with such description.
-        By clicking on the "Buy" icon during the order process, after having read the General Conditions
-        of Sale and Return Policy of the Seller indicated at the end of the file of each Product, and
-        having checked the content of the order or, if applicable, after the modification of the same,
-        the User declares to accept fully and without reservation the entirety of the Conditions of Use
-        of the Marketplace.
-
+    <string name="txt_terms_text"><b>General terms and conditions of use of the Marketplace</b>\n\n
+        DIGITAL WORLD is a commercial company domiciled in the Republic of Colombia that makes available on its website www.digitalworld.com/ ("The Site" or "digitalworld.com") a platform ("Marketplace"), which allows the exhibition and commercialization of goods and/or services ("the Products") by national or international sellers acting in their personal capacity and therefore independent from DIGITAL WORLD ("the Sellers"), for the online acquisition of the same by consumers ("Customers" or "Users").\n\n
+        DIGITAL WORLD is therefore not a distributor of the Products offered by the Sellers, does not have any contractual position within the transaction made between Customers and Sellers, nor can it be qualified as a reseller of the products offered by the Sellers in the Marketplace.\n\n
+        <b>Scope of application of the Terms of Use</b>\n\n
+        The present general conditions of use of the Marketplace ("Conditions of Use") apply to all orders of Products made by the Users to the Sellers of the Marketplace. The applicable Terms of Use are those in force at the time the order is placed by the User. Likewise, the Seller by the mere fact of exhibiting the Products in the Marketplace confirms the understanding and unconditionally accepts the application of the same.\n\n
+        <b>Capacity to use the platform</b>\n\n
+        The services offered in the Marketplace may only be used by persons who have legal capacity to contract in accordance with the provisions of the Colombian legislation in force.\n\n
+        <b>Purchase Process</b>\n\n
+        The Users can order the Products offered in the Marketplace directly and independently by the Sellers, which can be clearly identified by a mark in the description of the same or by the expression "Sold by". The description of the Products is provided by the Sellers, who are therefore solely responsible for the completeness of the description provided and the conformity of the Products with such description.\n\n
+        By clicking on the "Buy" icon during the order process, after having read the General Conditions of Sale and Return Policy of the Seller indicated at the end of the file of each Product, and having checked the content of the order or, if applicable, after the modification of the same, the User declares to accept fully and without reservation the entirety of the Conditions of Use of the Marketplace.\n\n
+        Once the content of the order has been confirmed, the Terms of Use of the Marketplace and the payment obligations of the order have been accepted, the User will definitively validate his order by the effective payment. The order will be valid only upon full payment of the price of the Product. The sale made by the Seller is subject to the resolutive condition that the Product is available.\n\n
+        Users may pay by DIGITAL WORLD Mastercard Gold, credit card, debit card to Current or Savings Account, 24-hour Consignment, Cash Payment and Present Card (only for employees of the DIGITAL WORLD Group).\n\n
+        DIGITAL WORLD collects the funds for orders placed through the Marketplace on behalf of the Seller. Any order that has not been paid in full will be refused.\n\n
+        DIGITAL WORLD systematically confirms the purchase order by email to each User (provided that the order is accepted by the bank or the chosen payment method). Once the order has been accepted, the order information will remain accessible on the Site in "order status".\n\n
+        DIGITAL WORLD has entered into a commercial partnership with a payment gateway, a company in charge of protecting Users against the risk of theft when placing their purchase orders with credit cards. The mission of payment gateway will then consist in verifying that the User is indeed at the origin of the orders placed on his behalf through the Marketplace and therefore, that his personal and/or banking information has not been usurped.\n\n
+        DIGITAL WORLD collects the funds for orders placed through the Marketplace on behalf of the Seller. Any order that has not been paid in full will be refused.\n\n
+        DIGITAL WORLD systematically confirms the purchase order by email to each User (provided that the order is accepted by the bank or the chosen payment method). Once the order has been accepted, the order information will remain accessible on the Site in "order status".\n\n
+        DIGITAL WORLD has entered into a commercial partnership with a payment gateway, a company in charge of protecting Users against the risk of theft when placing their purchase orders with credit cards. The mission of payment gateway will then consist in verifying that the User is indeed at the origin of the orders placed on his behalf through the Marketplace and therefore, that his personal and/or banking information has not been usurped.\n\n
+        <b>Shipping and Delivery</b>\n\n
+        All delivery times advertised begin to run after confirmation of the availability of the Products / service ordered, and are calculated in working days. Such times are also conditioned to the validation of the order by the payment gateway, therefore, the controls exercised by the payment gateway under the terms of paragraph f above, may extend the times specified by each Seller.\n\n
+        The times indicated include both the delivery of the Products at home, as well as the preparation and shipment of orders, and the delivery of the Products to the User by the carrier used by each of the Sellers.\n\n
+         <b>Right of withdrawal</b>\n\n
+        Pursuant to Article 47 of the Consumer Statute, Users may exercise the right of withdrawal of the Product purchased within five (5) business days after receipt of the good, provided that its nature allows it and the condition of the good and its packaging is the same in which it was received. Reversals will be made for the value of the Product paid by the Customer in the respective transaction. Under no circumstances will DIGITAL WORLD make partial refunds of the value of a Product.\n\n
+        To return a Product, the User must contact DIGITAL WORLD. The return of a Product shall be made in accordance with the terms and conditions indicated in the Consumer Charter, and, insofar as not contradicted therein, by the terms and conditions specified by the Seller. Any Product must be returned in the same condition in which it was received, with all supplied accessories if any (cords, warranties, manuals, software, etc.), undamaged, unused, in its original packaging, and must be sent to the address communicated by the Seller.\n\n
+        Phones that do not present the security seals, have been used or manipulated in operation under conditions that are deemed to go beyond those necessary to verify their delivery conditions will not be accepted for return.\n\n
+        After making the withdrawal on the page, the customer will have 5 working days to communicate the reverse logistics guide for the return of the product, if the product is not sent within this period, it will be understood that the customer wishes to cancel the withdrawal.\n\n
+        By order of the Seller, DIGITAL WORLD will reimburse the user by the same means of payment used to cancel the order. Therefore: if the User paid for his order by DIGITAL WORLD Mastercard Gold, DIGITAL WORLD will reimburse by crediting the Buyers credit card.\n\n
+        <b>Prices</b>\n\n
+        The prices of the Products are freely determined by the Sellers and are indicated excluding the price of their shipment in the Product sheet, in the line corresponding to the selected Seller. If necessary, shipping costs are added to the price of the Products before final validation by the Customer.\n\n
+        All Products offered on the Marketplace include in the price all taxes legally applicable in Colombia.\n\n
+        Some of the Products offered in the Marketplace may suffer some changes in the price during the day for reasons beyond the control of the Sellers, for example those arising from currency fluctuation.\n\n
+        <b>Responsibility</b>\n\n
+        The Products offered through the Marketplace are subject to availability and are offered on a limited basis until the stock reported by the Sellers is exhausted. Eventually it may happen that the same product is purchased by several Users at the same time, and that at the end of the sale process it turns out that the Product is no longer available due to the exhaustion of all available units, even if it appears in the Marketplace that the Product is available. In this case, the User will be informed of the situation and will be reimbursed the amount paid for the Product, if applicable, or will be notified of the impossibility of processing the purchase order.\n\n
+        The Sellers may not be held liable or in breach of these Terms of Use for any delay or default arising from the delivery of the Products, provided that such eventuality is caused by an event of force majeure or fortuitous event in accordance with Colombian Law.\n\n
+        All communications made in the Marketplace about the Products offered therein, especially those related to the description of the Products, their specifications, characteristics, price, delivery conditions, returns and exchanges are made directly by the Sellers, as well as those communications related to offers, promotions, discounts, liquidations, among others, of the products, and which are of their absolute responsibility, management and control.\n\n
+        The Products offered in the Marketplace are of absolute responsibility of the Sellers, as well as the use of the brands that identify them. Therefore, the Sellers shall be solely responsible in the event that third parties consider that their intellectual property rights have been infringed by the sale of the same and, therefore, any claim for this concept must be sent directly to the Sellers, whose contact details appear in the respective section of "Information about the Seller", accessible through any of the offers. Notwithstanding the foregoing, DIGITAL WORLD may eventually remove the information or Products in question from the Marketplace, without this implying in any case any admission of liability and without prejudice to any right, action or defense that may be available to the Sellers.\n\n
+        <b>Claims and Warranties</b>\n\n
+        DIGITAL WORLD operates as a mere facilitator of the platform for the display of the Products by the Sellers and the purchase of the same by the Users, and not as a reseller of the Products offered therein. Therefore, any complaint about the non-conformity or quality of the Products must be made directly by the Customer through the
+        hotline. Medellín: 3604010 and for the rest of the country at 018000112858.\n\n
+        The Seller is solely responsible for the Products offered through the Marketplace, DIGITAL WORLD however, reserves the right to intervene in the processes of claims and/or warranties, if the Seller does not provide any response to a request from the User in relation to such concepts within 5 working days.\n\n
+        The warranties of the Products sold by the Sellers on the Marketplace are specified in the comments of the offer made by the Sellers. For questions about the warranties corresponding to the Products offered through the Marketplace the User has the possibility - before ordering - to ask questions through the chat of the Site.\n\n
+        DIGITAL WORLD assumes no responsibility whatsoever and under no circumstances for the warranties granted by the Sellers of the Products, therefore, the User must contact the Seller directly to make the warranty effective.\n\n
+        <b>Modification of the Terms of Use</b>\n\n
+        DIGITAL WORLD reserves the right to make changes, additions or additions to these Terms of Use at any time. Therefore, Users shall be subject to the conditions in force on the date on which a purchase order is placed.\n\n
+        <b>Applicable Law and Jurisdiction</b>\n\n
+        These Terms and Conditions are governed by and construed in accordance with the laws of the Republic of Colombia. Any dispute relating thereto shall be subject to the courts of the Republic of Colombia.\n\n
+        <b>Invalidity</b>\n\n
+        In the event that any provision of these Terms and Conditions is held to be void, ineffective, or invalid, in whole or in part, by a court or any competent authority, such declaration shall not affect the validity of the remaining provisions, which shall remain in full force and effect.\n\n
     </string>
     <string name="txt_terms_ok">OK</string>
 

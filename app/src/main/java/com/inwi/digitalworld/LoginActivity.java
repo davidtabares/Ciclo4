@@ -38,17 +38,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String user = edt_user.getText().toString();
                 String password = edt_password.getText().toString();
 
-                Log.e("USUARIO", user);
-                Log.e("CONTRASENA", password);
+                Log.e("USER", user);
+                Log.e("PASSWORD", password);
 
                 if (user.equals("admin@admin.com") && password.equals("admin")) {
-                    Toast.makeText(this, "SE HA INICIADO SESIÓN", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getResources().getString(R.string.txt_logged), Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(this, MenuActivity.class);
                     startActivity(intent);
 
                 }  else {
-                    Toast.makeText(this, "ERROR INICIANDO SESIÓN", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getResources().getString(R.string.txt_login_error), Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.btn_sign_up:
