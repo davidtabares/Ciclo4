@@ -1,0 +1,77 @@
+<resources>
+    <string name="app_name">Digital World</string>
+
+    <!-- Strings Login -->
+    <string name="txt_user">User</string>
+    <string name="txt_password">Password</string>
+    <string name="txt_login">Login</string>
+    <string name="txt_sign_up">Sign Up</string>
+
+    <!-- Strings Sign Up -->
+    <string name="txt_first_name">First Name</string>
+    <string name="etxt_first_name">You first name</string>
+    <string name="txt_last_name">Last Name</string>
+    <string name="etxt_last_name">You last name</string>
+    <string name="txt_email">Email</string>
+    <string name="etxt_email">You email</string>
+    <string name="etxt_password_sign_up">You password</string>
+    <string name="txt_terms">Terms of service</string>
+    <string name="txt_user_registration">Create Account</string>
+    <string name="txt_valid_password">Valid Password</string>
+    <string name="txt_invalid_password">Invalid Password</string>
+
+    <!-- Strings Sign Up -->
+    <string name="txt_terms_title">Terms and Conditions Policy</string>
+    <string name="txt_terms_activity">
+        General terms and conditions of use of the Marketplace
+        DIGITAL WORLD. is a commercial company domiciled in the Republic of Colombia that
+        makes available on its website www.digitalworl.com/ ("The Site" or "digitalworld.com")
+        a platform ("Marketplace"), which allows the exhibition and commercialization of goods
+        and/or services ("the Products") by national or international sellers acting in their
+        personal capacity and therefore independent from DIGITAL WORLD ("the Sellers"), for the
+        online acquisition of the same by consumers ("Customers" or "Users").
+        DIGITAL WORLD is therefore not a distributor of the Products offered by the Sellers, does
+        not have any contractual position within the transaction made between Customers and Sellers,
+        nor can it be qualified as a reseller of the products offered by the Sellers in the Marketplace.
+
+        Scope of application of the Terms of Use
+        The present general conditions of use of the Marketplace ("Conditions of Use") apply to all
+        orders of Products made by the Users to the Sellers of the Marketplace. The applicable Terms of
+        Use are those in force at the time the order is placed by the User. Likewise, the Seller by the
+        mere fact of exhibiting the Products in the Marketplace confirms the understanding and
+        unconditionally accepts the application of the same.
+
+        Capacity to use the platform
+        The services offered in the Marketplace may only be used by persons who have legal capacity to
+        contract in accordance with the provisions of the Colombian legislation in force.
+
+        Purchase Process
+        The Users can order the Products offered in the Marketplace directly and independently by the
+        Sellers, which can be clearly identified by a mark in the description of the same or by the
+        expression "Sold by". The description of the Products is provided by the Sellers, who are
+        therefore solely responsible for the completeness of the description provided and the conformity
+        of the Products with such description.
+        By clicking on the "Buy" icon during the order process, after having read the General Conditions
+        of Sale and Return Policy of the Seller indicated at the end of the file of each Product, and
+        having checked the content of the order or, if applicable, after the modification of the same,
+        the User declares to accept fully and without reservation the entirety of the Conditions of Use
+        of the Marketplace.
+
+    </string>
+    <string name="txt_terms_ok">OK</string>
+
+    <!-- Strings Menu Navigation -->
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+
+</resources>
