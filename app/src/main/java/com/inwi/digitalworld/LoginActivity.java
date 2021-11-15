@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         edt_password = findViewById(R.id.edt_password);
 
         btn_login.setOnClickListener(this);
-        btn_sign_up.setOnClickListener(this);
+        btn_sign_up.setOnClickListener(this);//comentario
     }
 
     @Override
