@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_login:
-                String user = edt_user.getText().toString();//comentario 2
+                String user = edt_user.getText().toString();
                 String password = edt_password.getText().toString();
 
                 Log.e("USER", user);
