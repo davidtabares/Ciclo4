@@ -22,7 +22,7 @@
     <string name="txt_valid_password">Valid Password</string>
     <string name="txt_invalid_password">Invalid Password</string>
 
-    <!-- Strings Sign Up -->
+    <!-- Strings Terms -->
     <string name="txt_terms_title">Terms and Conditions Policy</string>
     <string name="txt_terms_text"><b>General terms and conditions of use of the Marketplace</b>\n\n
         DIGITAL WORLD is a commercial company domiciled in the Republic of Colombia that makes available on its website www.digitalworld.com/ ("The Site" or "digitalworld.com") a platform ("Marketplace"), which allows the exhibition and commercialization of goods and/or services ("the Products") by national or international sellers acting in their personal capacity and therefore independent from DIGITAL WORLD ("the Sellers"), for the online acquisition of the same by consumers ("Customers" or "Users").\n\n
@@ -74,6 +74,13 @@
         In the event that any provision of these Terms and Conditions is held to be void, ineffective, or invalid, in whole or in part, by a court or any competent authority, such declaration shall not affect the validity of the remaining provisions, which shall remain in full force and effect.\n\n
     </string>
     <string name="txt_terms_ok">OK</string>
+    <string name="txt_terms_accept">You accept terms and conditions</string>
+    <string name="txt_terms_no_accept">You do not accept terms and conditions</string>
+
+    <!-- Strings Menu Activity -->
+    <string name="txt_no_user">No user</string>
+    <string name="txt_no_password">No password</string>
+    <string name="txt_add_product">Add a new product</string>
 
     <!-- Strings Menu Navigation -->
     <string name="title_activity_menu">MenuActivity</string>
@@ -85,8 +92,28 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
+    <string name="menu_product">Products</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <!-- Strings ProductFragment -->
+
+
+    <string-array name="categories">
+        <item>Futbol</item>
+        <item>Baloncesto</item>
+        <item>Tenis</item>
+        <item>Natación</item>
+        <item>Beisbol</item>
+        <item>Carreras</item>
+    </string-array>
+
+    <!-- Strings Row_Item_Products -->
+    <string name="txt_name_row">Name</string>
+    <string name="txt_category_row">Category</string>
+    <string name="txt_value_row">Value</string>
+    <string name="txt_favorites">Favorites</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
