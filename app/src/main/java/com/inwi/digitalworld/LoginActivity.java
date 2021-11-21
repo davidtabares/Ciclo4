@@ -3,9 +3,12 @@ package com.inwi.digitalworld;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +16,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.inwi.digitalworld.database.UserDatabase;
+import com.inwi.digitalworld.database.model.User;
 import com.inwi.digitalworld.util.Constant;
+import com.inwi.digitalworld.util.Utilities;
+
+import java.lang.ref.WeakReference;
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -21,9 +30,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private EditText edt_user, edt_password;
 
-    private final int ACTIVITY_SIGN_UP = 1;
+    private final int ACTIVITY_REGISTER = 1;
 
     private SharedPreferences myPreferences;
+
+    private UserDatabase database;
+
+    private List<User> listUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +52,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btn_login.setOnClickListener(this);
         btn_sign_up.setOnClickListener(this);
 
-        myPreferences = getSharedPreferences(Constant.PREFERENCE,MODE_PRIVATE);
+        myPreferences = getSharedPreferences(Constant.PREFERENCE, MODE_PRIVATE);
+
+        database = UserDatabase.getInstance(this);
 
         String user = myPreferences.getString("user", "");
         String password = myPreferences.getString("password", "");
@@ -47,6 +62,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (!user.equals("") && !password.equals("")) {
             toLogin(user, password);
         }
+
+        new GetUserTask(this).execute();
 
     }
 
@@ -61,41 +78,45 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.e("PASSWORD", password);
 
                 if (user.equals("admin@admin.com") && password.equals("admin")) {
+
                     toLogin(user, password);
+
                 }
                 else {
-                    Toast.makeText(this, getResources().getString(R.string.txt_login_error), Toast.LENGTH_SHORT).show();
+
+                    new GetUserLoginTask(this, user, Utilities.md5(password));
+                    //Toast.makeText(this, getResources().getString(R.string.txt_login_error), Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.btn_sign_up:
                 Intent intent = new Intent(this, SignUpActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, ACTIVITY_REGISTER);
                 break;
         }
     }
 
     public void toLogin(String user, String password){
-
         Toast.makeText(this, getResources().getString(R.string.txt_logged), Toast.LENGTH_SHORT).show();
 
         SharedPreferences.Editor editor = myPreferences.edit();
         editor.putString("user", user);
         editor.putString("password", password);
+
         editor.commit();
 
         Intent intent = new Intent(this, MenuActivity.class);
         intent.putExtra("user", user);
         intent.putExtra("password", password);
         startActivity(intent);
+        finish();
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == ACTIVITY_SIGN_UP){
+        if(requestCode == ACTIVITY_REGISTER){
 
             if (resultCode == Activity.RESULT_OK) {
 
@@ -105,6 +126,69 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 toLogin(user, password);
 
             }
+        }
+    }
+
+    private static class GetUserTask extends AsyncTask<Void, Void, List<User>> {
+
+        private WeakReference<LoginActivity> loginActivityWeakReference;
+
+        GetUserTask(LoginActivity context) {
+            this.loginActivityWeakReference = new WeakReference<>(context);
+        }
+
+        @Override
+        protected List<User> doInBackground(Void... voids) {
+            if (loginActivityWeakReference.get() != null) {
+                List<User> users = loginActivityWeakReference.get().database.getUserDAO().getUser();
+                return users;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(List<User> users) {
+            if (users != null && users.size() > 0) {
+                loginActivityWeakReference.get().listUsers = users;
+            }
+            super.onPostExecute(users);
+        }
+
+    }
+
+    private static class GetUserLoginTask extends AsyncTask<Void, Void, User> {
+
+        private String email;
+        private String password;
+        private WeakReference<LoginActivity> loginActivityWeakReference;
+
+        GetUserLoginTask(LoginActivity context, String email, String password) {
+            this.loginActivityWeakReference = new WeakReference<>(context);
+            this.email = email;
+            this.password = password;
+            doInBackground();
+        }
+
+        @Override
+        protected User doInBackground(Void... voids) {
+            if (loginActivityWeakReference.get() != null) {
+                User user = loginActivityWeakReference.get().database.getUserDAO().getUserLogin(email, password);
+                onPostExecute(user);
+                return user;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(User user) {
+            if (user != null) {
+
+                loginActivityWeakReference.get().toLogin(email, password);
+            }
+            else {
+                Log.e("LOGINTASK", "LOGIN ERROR");
+            }
+            super.onPostExecute(user);
         }
     }
 

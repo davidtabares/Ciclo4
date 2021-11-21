@@ -93,25 +93,38 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_product">Products</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_add_product">Add Product</string>
+    <string name="menu_favorites">Favorites</string>
+    <string name="menu_shopping_cart">Shopping Cart</string>
+    <string name="menu_logout">Log Out</string>
 
     <!-- Strings ProductFragment -->
-
-
     <string-array name="categories">
-        <item>Futbol</item>
-        <item>Baloncesto</item>
-        <item>Tenis</item>
-        <item>Natación</item>
-        <item>Beisbol</item>
-        <item>Carreras</item>
+        <item>Home</item>
+        <item>Home Basic</item>
+        <item>AIO</item>
+        <item>AIO Gamer</item>
+        <item>Gamer</item>
     </string-array>
+
+    <!-- Strings Add_Products_Fragment -->
+    <string name="txt_product_name">Product</string>
+    <string name="txt_product_name_hint">Product name</string>
+    <string name="txt_product_category">Category</string>
+    <string name="txt_product_category_hint">Product category</string>
+    <string name="txt_product_value">Value</string>
+    <string name="txt_product_value_hint">Product value</string>
+    <string name="txt_product_image">Image</string>
+    <string name="txt_product_image_hint">Type the url of your product photo</string>
+    <string name="txt_btn_add_product">Add Product</string>
 
     <!-- Strings Row_Item_Products -->
     <string name="txt_name_row">Name</string>
     <string name="txt_category_row">Category</string>
     <string name="txt_value_row">Value</string>
     <string name="txt_favorites">Favorites</string>
+    <string name="txt_shopping_cart">Shopping Cart</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

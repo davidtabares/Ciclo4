@@ -1,6 +1,8 @@
 package com.inwi.digitalworld.ui.products;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.inwi.digitalworld.R;
 
 import org.json.JSONArray;
@@ -31,8 +35,7 @@ public class ProductFragment extends Fragment {
     private RecyclerView rev_products;
     private RecyclerView.Adapter myAdapter;
 
-    private String products = "[{\"nombre\":\"Guantes\",\"categoria\":\"Futbol\",\"precio\":40000,\"enstock\":true,\"sucursal\":[{\"nombre\":\"Sucursal A\",\"direccion\":\"Diección A\",\"encargado\":{\"nombre\":\"Encargado A\"}},{\"nombre\":\"Sucursal B\",\"direccion\":\"Diección B\",\"encargado\":{\"nombre\":\"Encargado B\"}}]},{\"nombre\":\"Guayos\",\"categoria\":\"Futbol\",\"precio\":40000,\"enstock\":true,\"sucursal\":[{\"nombre\":\"Sucursal C\",\"direccion\":\"Diección C\",\"encargado\":{\"nombre\":\"Encargado C\"}},{\"nombre\":\"Sucursal D\",\"direccion\":\"Diección D\",\"encargado\":{\"nombre\":\"Encargado D\"}}]},{\"nombre\":\"Balón\",\"categoria\":\"Futbol\",\"precio\":40000,\"enstock\":true,\"sucursal\":[{\"nombre\":\"Sucursal E\",\"direccion\":\"Diección E\",\"encargado\":{\"nombre\":\"Encargado E\"}},{\"nombre\":\"Sucursal F\",\"direccion\":\"Diección F\",\"encargado\":{\"nombre\":\"Encargado F\"}}]},{\"nombre\":\"Casco\",\"categoria\":\"Futbol\",\"precio\":40000,\"enstock\":true,\"sucursal\":[{\"nombre\":\"Sucursal E\",\"direccion\":\"Diección E\",\"encargado\":{\"nombre\":\"Encargado E\"}},{\"nombre\":\"Sucursal F\",\"direccion\":\"Diección F\",\"encargado\":{\"nombre\":\"Encargado F\"}}]},{\"nombre\":\"Medias\",\"categoria\":\"Futbol\",\"precio\":40000,\"enstock\":true,\"sucursal\":[{\"nombre\":\"Sucursal E\",\"direccion\":\"Diección E\",\"encargado\":{\"nombre\":\"Encargado E\"}},{\"nombre\":\"Sucursal F\",\"direccion\":\"Diección F\",\"encargado\":{\"nombre\":\"Encargado F\"}}]},{\"nombre\":\"Canilleras\",\"categoria\":\"Futbol\",\"precio\":40000,\"enstock\":true,\"sucursal\":[{\"nombre\":\"Sucursal E\",\"direccion\":\"Diección E\",\"encargado\":{\"nombre\":\"Encargado E\"}},{\"nombre\":\"Sucursal F\",\"direccion\":\"Diección F\",\"encargado\":{\"nombre\":\"Encargado F\"}}]},{\"nombre\":\"Pelota\",\"categoria\":\"Futbol\",\"precio\":40000,\"enstock\":true,\"sucursal\":[{\"nombre\":\"Sucursal E\",\"direccion\":\"Diección E\",\"encargado\":{\"nombre\":\"Encargado E\"}},{\"nombre\":\"Sucursal F\",\"direccion\":\"Diección F\",\"encargado\":{\"nombre\":\"Encargado F\"}}]},{\"nombre\":\"Tobilleras\",\"categoria\":\"Futbol\",\"precio\":40000,\"enstock\":true,\"sucursal\":[{\"nombre\":\"Sucursal E\",\"direccion\":\"Diección E\",\"encargado\":{\"nombre\":\"Encargado E\"}},{\"nombre\":\"Sucursal F\",\"direccion\":\"Diección F\",\"encargado\":{\"nombre\":\"Encargado F\"}}]},{\"nombre\":\"Guantes\",\"categoria\":\"Futbol\",\"precio\":40000,\"enstock\":true,\"sucursal\":[{\"nombre\":\"Sucursal A\",\"direccion\":\"Diección A\",\"encargado\":{\"nombre\":\"Encargado A\"}},{\"nombre\":\"Sucursal B\",\"direccion\":\"Diección B\",\"encargado\":{\"nombre\":\"Encargado B\"}}]},{\"nombre\":\"Guayos\",\"categoria\":\"Futbol\",\"precio\":40000,\"enstock\":true,\"sucursal\":[{\"nombre\":\"Sucursal C\",\"direccion\":\"Diección C\",\"encargado\":{\"nombre\":\"Encargado C\"}},{\"nombre\":\"Sucursal D\",\"direccion\":\"Diección D\",\"encargado\":{\"nombre\":\"Encargado D\"}}]},{\"nombre\":\"Balón\",\"categoria\":\"Futbol\",\"precio\":40000,\"enstock\":true,\"sucursal\":[{\"nombre\":\"Sucursal E\",\"direccion\":\"Diección E\",\"encargado\":{\"nombre\":\"Encargado E\"}},{\"nombre\":\"Sucursal F\",\"direccion\":\"Diección F\",\"encargado\":{\"nombre\":\"Encargado F\"}}]},{\"nombre\":\"Casco\",\"categoria\":\"Futbol\",\"precio\":40000,\"enstock\":true,\"sucursal\":[{\"nombre\":\"Sucursal E\",\"direccion\":\"Diección E\",\"encargado\":{\"nombre\":\"Encargado E\"}},{\"nombre\":\"Sucursal F\",\"direccion\":\"Diección F\",\"encargado\":{\"nombre\":\"Encargado F\"}}]},{\"nombre\":\"Medias\",\"categoria\":\"Futbol\",\"precio\":40000,\"enstock\":true,\"sucursal\":[{\"nombre\":\"Sucursal E\",\"direccion\":\"Diección E\",\"encargado\":{\"nombre\":\"Encargado E\"}},{\"nombre\":\"Sucursal F\",\"direccion\":\"Diección F\",\"encargado\":{\"nombre\":\"Encargado F\"}}]},{\"nombre\":\"Canilleras\",\"categoria\":\"Futbol\",\"precio\":40000,\"enstock\":true,\"sucursal\":[{\"nombre\":\"Sucursal E\",\"direccion\":\"Diección E\",\"encargado\":{\"nombre\":\"Encargado E\"}},{\"nombre\":\"Sucursal F\",\"direccion\":\"Diección F\",\"encargado\":{\"nombre\":\"Encargado F\"}}]},{\"nombre\":\"Pelota\",\"categoria\":\"Futbol\",\"precio\":40000,\"enstock\":true,\"sucursal\":[{\"nombre\":\"Sucursal E\",\"direccion\":\"Diección E\",\"encargado\":{\"nombre\":\"Encargado E\"}},{\"nombre\":\"Sucursal F\",\"direccion\":\"Diección F\",\"encargado\":{\"nombre\":\"Encargado F\"}}]},{\"nombre\":\"Tobilleras\",\"categoria\":\"Futbol\",\"precio\":40000,\"enstock\":true,\"sucursal\":[{\"nombre\":\"Sucursal E\",\"direccion\":\"Diección E\",\"encargado\":{\"nombre\":\"Encargado E\"}},{\"nombre\":\"Sucursal F\",\"direccion\":\"Diección F\",\"encargado\":{\"nombre\":\"Encargado F\"}}]}]";
-
+    private String products = "[{\"name\":\"Desktop\",\"category\":\"Home Basic\",\"value\":1500000,\"stock\":true,\"image\":\"https://http2.mlstatic.com/D_NQ_NP_910064-MCO44655574490_012021-V.jpg\",\"branchOffice\":[{\"name\":\"Digital World Bogotá\",\"address\":\"Av 17 #21-30\",\"manager\":{\"name\":\"David Tabares\"}},{\"name\":\"Digital World Medellín\",\"address\":\"Carrera 20 #70-45\",\"manager\":{\"name\":\"Caterine Gallego\"}}]},{\"name\":\"Desktop\",\"category\":\"Gaming\",\"value\":4500000,\"stock\":true,\"image\":\"https://http2.mlstatic.com/D_NQ_NP_715593-MCO45728605208_042021-V.jpg\",\"branchOffice\":[{\"name\":\"Digital World Bogotá\",\"address\":\"Av 17 #21-30\",\"manager\":{\"name\":\"David Tabares\"}},{\"name\":\"Digital World Medellín\",\"address\":\"Carrera 20 #70-45\",\"manager\":{\"name\":\"Caterine Gallego\"}}]},{\"name\":\"AIO\",\"category\":\"Home Basic\",\"value\":1800000,\"stock\":true,\"image\":\"https://http2.mlstatic.com/D_NQ_NP_633207-MCO44266638866_122020-O.jpg\",\"branchOffice\":[{\"name\":\"Digital World Bogotá\",\"address\":\"Av 17 #21-30\",\"manager\":{\"name\":\"David Tabares\"}},{\"name\":\"Digital World Medellín\",\"address\":\"Carrera 20 #70-45\",\"manager\":{\"name\":\"Caterine Gallego\"}}]},{\"name\":\"CPU Gamer\",\"category\":\"Gamer\",\"value\":2500000,\"stock\":true,\"image\":\"https://http2.mlstatic.com/D_NQ_NP_944242-MCO47817355191_102021-V.jpg\",\"branchOffice\":[{\"name\":\"Digital World Bogotá\",\"address\":\"Av 17 #21-30\",\"manager\":{\"name\":\"David Tabares\"}},{\"name\":\"Digital World Medellín\",\"address\":\"Carrera 20 #70-45\",\"manager\":{\"name\":\"Caterine Gallego\"}}]},{\"name\":\"AIO Lenovo\",\"category\":\"Advanced\",\"value\":2500000,\"stock\":true,\"image\":\"https://http2.mlstatic.com/D_NQ_NP_672650-MCO43684434312_102020-V.jpg\",\"branchOffice\":[{\"name\":\"Digital World Bogotá\",\"address\":\"Av 17 #21-30\",\"manager\":{\"name\":\"David Tabares\"}}]},{\"name\":\"Asus TUF Gaming\",\"category\":\"Laptop Gamer\",\"value\":3800000,\"stock\":true,\"image\":\"https://http2.mlstatic.com/D_NQ_NP_800226-MCO44047700886_112020-O.jpg\",\"branchOffice\":[{\"name\":\"Digital World Bogotá\",\"address\":\"Av 17 #21-30\",\"manager\":{\"name\":\"David Tabares\"}},{\"name\":\"Digital World Medellín\",\"address\":\"Carrera 20 #70-45\",\"manager\":{\"name\":\"Caterine Gallego\"}}]},{\"name\":\"Combo Gamer\",\"category\":\"Gamer\",\"value\":180000,\"stock\":true,\"image\":\"https://http2.mlstatic.com/D_NQ_NP_966884-MCO40842599303_022020-O.jpg\",\"branchOffice\":[{\"name\":\"Digital World Bogotá\",\"address\":\"Av 17 #21-30\",\"manager\":{\"name\":\"David Tabares\"}},{\"name\":\"Digital World Medellín\",\"address\":\"Carrera 20 #70-45\",\"manager\":{\"name\":\"Caterine Gallego\"}}]},{\"name\":\"Headphones Gamer\",\"category\":\"Gamer\",\"value\":250000,\"stock\":true,\"image\":\"https://http2.mlstatic.com/D_NQ_NP_753719-MLA45667958896_042021-O.jpg\",\"branchOffice\":[{\"name\":\"Digital World Bogotá\",\"address\":\"Av 17 #21-30\",\"manager\":{\"name\":\"David Tabares\"}},{\"name\":\"Digital World Medellín\",\"address\":\"Carrera 20 #70-45\",\"manager\":{\"name\":\"Caterine Gallego\"}}]},{\"name\":\"Computer monitor\",\"category\":\"Gamer\",\"value\":600000,\"stock\":true,\"image\":\"https://http2.mlstatic.com/D_NQ_NP_821834-MLA45731686514_042021-O.jpg\",\"branchOffice\":[{\"name\":\"Digital World Bogotá\",\"address\":\"Av 17 #21-30\",\"manager\":{\"name\":\"David Tabares\"}},{\"name\":\"Digital World Medellín\",\"address\":\"Carrera 20 #70-45\",\"manager\":{\"name\":\"Caterine Gallego\"}}]},{\"name\":\"TV 4K\",\"category\":\"Home\",\"value\":5600000,\"stock\":true,\"image\":\"https://http2.mlstatic.com/D_NQ_NP_915662-MCO31697281687_082019-V.jpg\",\"branchOffice\":[{\"name\":\"Digital World Bogotá\",\"address\":\"Av 17 #21-30\",\"manager\":{\"name\":\"David Tabares\"}},{\"name\":\"Digital World Medellín\",\"address\":\"Carrera 20 #70-45\",\"manager\":{\"name\":\"Caterine Gallego\"}}]}]";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,7 +44,7 @@ public class ProductFragment extends Fragment {
         tev_product = root.findViewById(R.id.tev_product);
         spn_categories = root.findViewById(R.id.spn_categories);
 
-        String[] categories = new String[]{"Beisbol", "Atletismo", "Karate", "Salto triple"};
+        String[] categories = new String[]{"Home", "Home Basic", "Gamer"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item,
                 categories);
@@ -75,15 +78,15 @@ public class ProductFragment extends Fragment {
 
             JSONObject product0 = jsonProducts.getJSONObject(0);
 
-            String name = product0.getString("nombre");
+            String name = product0.getString("name");
 
-            JSONArray sucursal = product0.getJSONArray("sucursal");
+            JSONArray branchOffice = product0.getJSONArray("branchOffice");
 
-            JSONObject sucursal1 = sucursal.getJSONObject(1);
+            JSONObject branchOffice1 = branchOffice.getJSONObject(1);
 
-            String nombreSucursal = sucursal1.getString("nombre");
+            String nameBranchOffice = branchOffice1.getString("name");
 
-            Toast.makeText(getActivity(), "NOMBRE: "+ nombreSucursal, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "NAME: "+ nameBranchOffice, Toast.LENGTH_SHORT).show();
 
         }
         catch (JSONException e) {
@@ -94,22 +97,16 @@ public class ProductFragment extends Fragment {
 
     }
 
-/*    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }*/
-
 }
 
 class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
 
     private JSONArray products;
-    private Activity myActividad;
+    private Activity myActivity;
 
-    public ProductsAdapter(JSONArray products, Activity myActividad) {
+    public ProductsAdapter(JSONArray products, Activity myActivity) {
         this.products = products;
-        this.myActividad = myActividad;
+        this.myActivity = myActivity;
     }
 
     @Override
@@ -127,11 +124,27 @@ class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
             String name = this.products.getJSONObject(position).getString("name");
             String category = this.products.getJSONObject(position).getString("category");
             int value = this.products.getJSONObject(position).getInt("value");
+            String image = this.products.getJSONObject(position).getString("image");
 
             holder.tev_item_name.setText(name);
             holder.tev_item_category.setText(category);
             holder.tev_item_value.setText("$" + value);
-        } catch (JSONException e) {
+
+            if (image.equals("digital_world")) {
+
+                holder.imv_item_product.setImageResource(myActivity.getResources().getIdentifier(image, "drawable", myActivity.getPackageName()));
+
+                holder.imv_item_product.setImageDrawable(myActivity.getDrawable(R.drawable.digital_world));
+            }
+            else {
+                Glide.with(myActivity)
+                        .load(image)
+                        .placeholder(new ColorDrawable(Color.BLACK))
+                        .into(holder.imv_item_product);
+            }
+
+        }
+        catch (JSONException e) {
             holder.tev_item_name.setText("Error");
         }
 
@@ -147,12 +160,13 @@ class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
         private TextView tev_item_name;
         private TextView tev_item_category;
         private TextView tev_item_value;
+        private ImageView imv_item_product;
         public ViewHolder(View v) {
             super(v);
             tev_item_name = v.findViewById(R.id.tev_item_name);
             tev_item_category = v.findViewById(R.id.tev_item_category);
             tev_item_value = v.findViewById(R.id.tev_item_value);
-
+            imv_item_product = v.findViewById(R.id.imv_item_product);
         }
     }
 }
