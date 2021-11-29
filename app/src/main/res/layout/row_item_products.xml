@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="50">
+
+        <ImageView
+            android:id="@+id/imv_item_product"
+            android:layout_width="150dp"
+            android:layout_height="163dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/digital_world">
+        </ImageView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="50"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tev_item_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_name_row"
+            android:textStyle="bold"
+            android:textSize="20dp">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tev_item_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_category_row"
+            android:textStyle="italic"
+            android:textSize="20dp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tev_item_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_value_row"
+            android:textStyle="bold"
+            android:textSize="20dp">
+
+        </TextView>
+
+        <Button
+            android:id="@+id/btn_item_favorite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_favorites_star"
+            android:text="@string/txt_favorites">
+
+        </Button>
+
+        <Button
+            android:id="@+id/btn_item_shopping_cart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_shopping_cart"
+            android:text="@string/txt_shopping_cart">
+
+        </Button>
+
+    </LinearLayout>
+
+</LinearLayout>

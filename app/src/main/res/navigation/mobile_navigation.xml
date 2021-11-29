@@ -12,14 +12,27 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.inwi.digitalworld.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_product"
+        android:name="com.inwi.digitalworld.ui.products.ProductFragment"
+        android:label="@string/menu_product"
+        tools:layout="@layout/fragment_product" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.inwi.digitalworld.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_add_product"
+        android:name="com.inwi.digitalworld.ui.products.AddProductFragment"
+        android:label="@string/menu_add_product"
+        tools:layout="@layout/fragment_add_product" />
+
+    <fragment
+        android:id="@+id/nav_favorites"
+        android:name="com.inwi.digitalworld.ui.favorites.FavoritesFragment"
+        android:label="@string/menu_favorites"
+        tools:layout="@layout/fragment_favorites" />
+
+    <fragment
+        android:id="@+id/nav_shopping_cart"
+        android:name="com.inwi.digitalworld.ui.shoppingcart.ShoppingCartFragment"
+        android:label="@string/menu_shopping_cart"
+        tools:layout="@layout/fragment_shopping_cart" />
+
 </navigation>
