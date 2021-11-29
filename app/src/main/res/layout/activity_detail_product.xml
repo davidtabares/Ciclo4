@@ -17,7 +17,7 @@
 
         <TextView
             style="@style/MyTextView"
-            android:id="@+id/tev_detalle_nombre"
+            android:id="@+id/tev_detail_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nombre"
@@ -25,14 +25,14 @@
             android:layout_gravity="center"/>
 
         <ImageView
-            android:id="@+id/imv_detalle_imagen"
+            android:id="@+id/imv_detail_image"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:layout_gravity="center"
             android:src="@drawable/digital_world"/>
 
         <TextView
-            android:id="@+id/tev_detalle_categoria"
+            android:id="@+id/tev_detail_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Categoría"
@@ -40,7 +40,7 @@
             android:layout_gravity="center"/>
 
         <TextView
-            android:id="@+id/tev_detalle_precio"
+            android:id="@+id/tev_detail_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Precio"
@@ -48,10 +48,18 @@
             android:layout_gravity="center"/>
 
         <TextView
-            android:id="@+id/tev_detalle_stock"
+            android:id="@+id/tev_detail_stock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Disponible"
+            android:textSize="20dp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/tev_detail_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Producto de tecnología"
             android:textSize="20dp"
             android:layout_gravity="center"/>
 
