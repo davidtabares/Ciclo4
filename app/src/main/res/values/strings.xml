@@ -116,6 +116,8 @@
     <string name="txt_product_value_hint">Product value</string>
     <string name="txt_product_image">Image</string>
     <string name="txt_product_image_hint">Type the url of your product photo</string>
+    <string name="txt_product_description">Description</string>
+    <string name="txt_product_description_hint">Describe your product</string>
     <string name="txt_btn_add_product">Add Product</string>
 
     <!-- Strings Row_Item_Products -->

@@ -45,7 +45,7 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, getResources().getString(R.string.txt_add_product), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
                 //El fab abre fragments desde el menú

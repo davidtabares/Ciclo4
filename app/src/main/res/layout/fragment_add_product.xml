@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:inputType="textPersonName"
+        android:inputType="textAutoCorrect"
         android:hint="@string/txt_product_name_hint"
         style="@style/MyEditText" />
 
@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:inputType="textPersonName"
+        android:inputType="textAutoCorrect"
         android:hint="@string/txt_product_category_hint"
         style="@style/MyEditText" />
 
@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:inputType="textEmailAddress"
+        android:inputType="number"
         android:hint="@string/txt_product_value_hint"
         style="@style/MyEditText" />
 
@@ -63,12 +63,27 @@
         style="@style/MyTextView"/>
 
     <EditText
-        android:id="@+id/edt_password_sign_up"
+        android:id="@+id/edt_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:inputType="textPassword"
+        android:inputType="textUri"
         android:hint="@string/txt_product_image_hint"
+        style="@style/MyEditText" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_product_description"
+        style="@style/MyTextView"/>
+
+    <EditText
+        android:id="@+id/edt_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:inputType="textLongMessage"
+        android:hint="@string/txt_product_description_hint"
         style="@style/MyEditText" />
 
     <Button
