@@ -9,7 +9,7 @@
     android:background="@drawable/gradient"
     tools:context=".ui.products.ProductFragment">
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/tev_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:entries="@array/categories">
 
-    </Spinner>
+    </Spinner>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rev_products"

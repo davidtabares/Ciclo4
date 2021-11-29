@@ -29,8 +29,8 @@ import org.json.JSONObject;
 
 public class ProductFragment extends Fragment {
 
-    private TextView tev_product;
-    private Spinner spn_categories;
+    //private TextView tev_product;
+    //private Spinner spn_categories;
 
     private RecyclerView rev_products;
     private RecyclerView.Adapter myAdapter;
@@ -41,15 +41,15 @@ public class ProductFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_product,container,false);
-        tev_product = root.findViewById(R.id.tev_product);
-        spn_categories = root.findViewById(R.id.spn_categories);
+        //tev_product = root.findViewById(R.id.tev_product);
+        //spn_categories = root.findViewById(R.id.spn_categories);
 
         String[] categories = new String[]{"Home", "Home Basic", "Gamer"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item,
                 categories);
 
-        spn_categories.setAdapter(adapter);
+        /*spn_categories.setAdapter(adapter);
 
         spn_categories.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -64,7 +64,7 @@ public class ProductFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
         rev_products = root.findViewById(R.id.rev_products);
         rev_products.setLayoutManager(new LinearLayoutManager(getActivity()));
