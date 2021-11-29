@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "261441332606",
+    "project_id": "digital-world-a0b35",
+    "storage_bucket": "digital-world-a0b35.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261441332606:android:2183447f8f495abd8e7f2f",
+        "android_client_info": {
+          "package_name": "com.inwi.digitalworld"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "261441332606-spic2429af9ph2d8f3kbdkk2m45u1ttf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw5gwUJZveYUJuBwnWbW18dgHZOM5v2zg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261441332606-spic2429af9ph2d8f3kbdkk2m45u1ttf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

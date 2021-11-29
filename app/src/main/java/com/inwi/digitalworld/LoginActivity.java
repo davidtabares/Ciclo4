@@ -1,5 +1,6 @@
 package com.inwi.digitalworld;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +17,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.inwi.digitalworld.database.UserDatabase;
 import com.inwi.digitalworld.database.model.User;
 import com.inwi.digitalworld.util.Constant;
@@ -37,6 +43,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private UserDatabase database;
 
     private List<User> listUsers;
+
+    private FirebaseAuth myAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +73,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         new GetUserTask(this).execute();
 
+        myAuth = FirebaseAuth.getInstance();
+
     }
 
     @Override
@@ -84,8 +94,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 else {
 
-                    new GetUserLoginTask(this, user, Utilities.md5(password));
-                    //Toast.makeText(this, getResources().getString(R.string.txt_login_error), Toast.LENGTH_SHORT).show();
+                    loginFirebase(user, password);
+                    //new GetUserLoginTask(this, user, Utilities.md5(password));
+                    Toast.makeText(this, getResources().getString(R.string.txt_login_error), Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.btn_sign_up:
@@ -93,6 +104,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivityForResult(intent, ACTIVITY_REGISTER);
                 break;
         }
+    }
+
+    public void loginFirebase(String user, String password) {
+        myAuth.signInWithEmailAndPassword(user, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.e("TAG", "signInWithEmail:success");
+                            FirebaseUser userFB = myAuth.getCurrentUser();
+                            toLogin(user, password);
+                        }
+                        else {
+                            // If sign in fails, display a message to the user.
+                            Log.e("TAG", "signInWithEmail:failure", task.getException());
+                        }
+                    }
+                });
     }
 
     public void toLogin(String user, String password){

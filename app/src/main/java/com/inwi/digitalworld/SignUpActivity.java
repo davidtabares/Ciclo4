@@ -1,11 +1,13 @@
 package com.inwi.digitalworld;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,31 +16,32 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.inwi.digitalworld.database.UserDatabase;
 import com.inwi.digitalworld.database.model.User;
 import com.inwi.digitalworld.util.Utilities;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 public class SignUpActivity extends AppCompatActivity {
-
     private CheckBox chb_terms;
     private Button btn_user_registration;
     private TextView textView_terms;
     private EditText edt_first_name, edt_last_name, edt_email_sign_up, edt_password_sign_up;
-
     private Activity myActivity;
-
     private final int ACTIVITY_TERMS = 2;
 
     private UserDatabase database;
+
+    private FirebaseAuth myAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
         chb_terms = findViewById(R.id.chb_terms);
         btn_user_registration = findViewById(R.id.btn_user_registration);
         edt_first_name = findViewById(R.id.edt_first_name);
@@ -46,20 +49,15 @@ public class SignUpActivity extends AppCompatActivity {
         edt_email_sign_up = findViewById(R.id.edt_email_sign_up);
         edt_password_sign_up = findViewById(R.id.edt_password_sign_up);
         textView_terms = findViewById(R.id.textView_terms);
-
         myActivity = this;
-
         btn_user_registration.setEnabled(false);
         chb_terms.setEnabled(false);
-
-
         chb_terms.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 btn_user_registration.setEnabled(isChecked);
             }
         });
-
         btn_user_registration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,22 +65,22 @@ public class SignUpActivity extends AppCompatActivity {
                 String lastName = edt_last_name.getText().toString();
                 String email = edt_email_sign_up.getText().toString();
                 String password = edt_password_sign_up.getText().toString();
-
                 if(password.length() < 8 && !isValidPassword(password)){
                     Toast.makeText(SignUpActivity.this, getResources().getString(R.string.txt_invalid_password), Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Toast.makeText(SignUpActivity.this, getResources().getString(R.string.txt_valid_password), Toast.LENGTH_SHORT).show();
 
-                    User user = new User(firstName, lastName, email, Utilities.md5(password));
+                    //User user = new User(firstName, lastName, email, Utilities.md5(password));
 
-                    long l = database.getUserDAO().insertUser(user);
+                    //long l = database.getUserDAO().insertUser(user);
 
-                    finish();
+                    //finish();
+
+                    signUpUserFirebase(email, password);
                 }
             }
         });
-
         textView_terms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,38 +92,60 @@ public class SignUpActivity extends AppCompatActivity {
 
         database = UserDatabase.getInstance(this);
 
+        myAuth = FirebaseAuth.getInstance();
+    }
+
+    public void signUpUserFirebase(String email, String password) {
+        myAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.e("TAG", "createUserWithEmail:success");
+                            FirebaseUser user = myAuth.getCurrentUser();
+
+                            user.sendEmailVerification()
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.e("TAG", "Email sent.");
+                                            }
+                                        }
+                                    });
+
+                            finish();
+                        }
+                        else {
+                            // If sign in fails, display a message to the user.
+                            Log.e("TAG", "createUserWithEmail:failure", task.getException());
+                        }
+                    }
+                });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if(requestCode == ACTIVITY_TERMS){
-
             if (resultCode == Activity.RESULT_OK) {
-
                 String state = data.getStringExtra("STATE");
                 Toast.makeText(myActivity, getResources().getString(R.string.txt_terms_accept), Toast.LENGTH_SHORT).show();
                 chb_terms.setChecked(true);
-
             }
             else {
                 Toast.makeText(myActivity, getResources().getString(R.string.txt_terms_no_accept), Toast.LENGTH_SHORT).show();
                 chb_terms.setChecked(false);
             }
-
         }
     }
-
     public static boolean isValidPassword(final String password) {
-
         Pattern pattern;
         Matcher matcher;
         final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
         pattern = Pattern.compile(PASSWORD_PATTERN);
         matcher = pattern.matcher(password);
-
         return matcher.matches();
     }
-
 }
