@@ -44,7 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
         edt_first_name = findViewById(R.id.edt_first_name);
         edt_last_name = findViewById(R.id.edt_last_name);
         edt_email_sign_up = findViewById(R.id.edt_email_sign_up);
-        edt_password_sign_up = findViewById(R.id.edt_password);
+        edt_password_sign_up = findViewById(R.id.edt_password_sign_up);
         textView_terms = findViewById(R.id.textView_terms);
 
         myActivity = this;
