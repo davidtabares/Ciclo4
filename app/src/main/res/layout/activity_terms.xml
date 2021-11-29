@@ -6,42 +6,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="30dp"
+    android:background="@drawable/gradient"
     tools:context=".TermsActivity">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:padding="5dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:text="@string/txt_terms_title"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="30dp">
 
-        <com.codesgood.views.JustifiedTextView
-            android:id="@+id/textView_activity_terms"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:autoSizeTextType="uniform"
-            android:layout_margin="10dp"
-            android:textSize="13sp"
-            android:text="@string/txt_terms_text"
-            android:scrollbars="vertical" />
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:padding="5dp"
+            android:textStyle="bold"
+            android:textColor="@color/color3"
+            android:text="@string/txt_terms_title"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <com.codesgood.views.JustifiedTextView
+                android:id="@+id/textView_activity_terms"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:autoSizeTextType="uniform"
+                android:layout_margin="10dp"
+                android:textSize="13sp"
+                android:text="@string/txt_terms_text"
+                android:scrollbars="vertical" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_terms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="onCheck"
+            android:text="@string/txt_terms_ok" />
 
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_terms"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:onClick="onCheck"
-        android:text="@string/txt_terms_ok" />
-
-  </LinearLayout>
+</LinearLayout>

@@ -73,7 +73,7 @@
         <b>Invalidity</b>\n\n
         In the event that any provision of these Terms and Conditions is held to be void, ineffective, or invalid, in whole or in part, by a court or any competent authority, such declaration shall not affect the validity of the remaining provisions, which shall remain in full force and effect.\n\n
     </string>
-    <string name="txt_terms_ok">OK</string>
+    <string name="txt_terms_ok">Agree to terms and conditions</string>
     <string name="txt_terms_accept">You accept terms and conditions</string>
     <string name="txt_terms_no_accept">You do not accept terms and conditions</string>
 
@@ -97,6 +97,10 @@
     <string name="menu_favorites">Favorites</string>
     <string name="menu_shopping_cart">Shopping Cart</string>
     <string name="menu_logout">Log Out</string>
+
+    <!-- Strings HomeFragment -->
+    <string name="txt_home_welcome">WELCOME</string>
+    <string name="txt_home_message">Have a nice day!</string>
 
     <!-- Strings ProductFragment -->
     <string-array name="categories">

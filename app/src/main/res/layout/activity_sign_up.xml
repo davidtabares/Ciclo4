@@ -6,101 +6,110 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="30dp"
+    android:background="@drawable/gradient"
     tools:context=".SignUpActivity">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:src="@drawable/digital_world"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_first_name"
-        android:layout_marginTop="10dp"
-        style="@style/MyTextView"/>
-
-    <EditText
-        android:id="@+id/edt_first_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:inputType="textPersonName"
-        android:hint="@string/etxt_first_name"
-        style="@style/MyEditText" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_last_name"
-        style="@style/MyTextView"/>
-
-    <EditText
-        android:id="@+id/edt_last_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:inputType="textPersonName"
-        android:hint="@string/etxt_last_name"
-        style="@style/MyEditText" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_email"
-        style="@style/MyTextView"/>
-
-    <EditText
-        android:id="@+id/edt_email_sign_up"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:inputType="textEmailAddress"
-        android:hint="@string/etxt_email"
-        style="@style/MyEditText" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_password"
-        style="@style/MyTextView"/>
-
-    <EditText
-        android:id="@+id/edt_password_sign_up"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:inputType="textPassword"
-        android:hint="@string/etxt_password_sign_up"
-        style="@style/MyEditText" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="30dp">
 
-        <CheckBox
-            android:id="@+id/chb_terms"
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:buttonTint="#009E0F" />
-
-        <TextView
-            android:id="@+id/textView_terms"
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="@string/txt_terms" />
+            android:layout_weight="1"
+            android:src="@drawable/digital_world"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_first_name"
+            android:layout_marginTop="10dp"
+            style="@style/MyTextView"/>
+
+        <EditText
+            android:id="@+id/edt_first_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:inputType="textPersonName"
+            android:hint="@string/etxt_first_name"
+            style="@style/MyEditText" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_last_name"
+            style="@style/MyTextView"/>
+
+        <EditText
+            android:id="@+id/edt_last_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:inputType="textPersonName"
+            android:hint="@string/etxt_last_name"
+            style="@style/MyEditText" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_email"
+            style="@style/MyTextView"/>
+
+        <EditText
+            android:id="@+id/edt_email_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:inputType="textEmailAddress"
+            android:hint="@string/etxt_email"
+            style="@style/MyEditText" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_password"
+            style="@style/MyTextView"/>
+
+        <EditText
+            android:id="@+id/edt_password_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:inputType="textPassword"
+            android:hint="@string/etxt_password_sign_up"
+            style="@style/MyEditText" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <CheckBox
+                android:id="@+id/chb_terms"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:buttonTint="#009E0F" />
+
+            <TextView
+                android:id="@+id/textView_terms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="@string/txt_terms" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_user_registration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/txt_user_registration"/>
+
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_user_registration"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/txt_user_registration"/>
 
 </LinearLayout>
