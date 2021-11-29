@@ -1,6 +1,7 @@
 package com.inwi.digitalworld.ui.products;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.inwi.digitalworld.DetalleProductoActivity;
 import com.inwi.digitalworld.R;
 
 import org.json.JSONArray;
@@ -142,7 +144,23 @@ class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
                         .placeholder(new ColorDrawable(Color.BLACK))
                         .into(holder.imv_item_product);
             }
+            holder.imv_item_product.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        //Log.e("PRODUCTOS", productos.getJSONObject(position).toString());
+                        Intent intent = new Intent(myActivity, DetalleProductoActivity.class);
 
+                        intent.putExtra("producto", products.getJSONObject(position).toString());
+
+                        myActivity.startActivity(intent);
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
         catch (JSONException e) {
             holder.tev_item_name.setText("Error");
