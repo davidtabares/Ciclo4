@@ -124,6 +124,10 @@
     <string name="txt_product_description_hint">Describe your product</string>
     <string name="txt_btn_add_product">Add Product</string>
 
+    <!-- Strings DetailProduct -->
+    <string name="txt_product_in_stock">Product in stock</string>
+    <string name="txt_product_out_stock">Product out of stock</string>
+
     <!-- Strings Row_Item_Products -->
     <string name="txt_name_row">Name</string>
     <string name="txt_category_row">Category</string>

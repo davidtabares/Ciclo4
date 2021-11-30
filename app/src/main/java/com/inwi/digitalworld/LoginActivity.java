@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     loginFirebase(user, password);
                     //new GetUserLoginTask(this, user, Utilities.md5(password));
-                    Toast.makeText(this, getResources().getString(R.string.txt_login_error), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, getResources().getString(R.string.txt_login_error), Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.btn_sign_up:

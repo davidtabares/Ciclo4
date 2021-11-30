@@ -54,12 +54,12 @@ public class DetailProductActivity extends AppCompatActivity {
                 tev_detail_value.setText("$" + value);
                 tev_detail_description.setText(description);
 
-                if (instock = true) {
-                    tev_detail_stock.setText("Product in stock");
-                    tev_detail_stock.setTextColor(Color.GREEN);
+                if (instock) {
+                    tev_detail_stock.setText(getResources().getString(R.string.txt_product_in_stock));
+                    tev_detail_stock.setTextColor(Color.WHITE);
                 }
                 else {
-                    tev_detail_stock.setText("Product out of stock");
+                    tev_detail_stock.setText(getResources().getString(R.string.txt_product_out_stock));
                     tev_detail_stock.setTextColor(Color.RED);
                 }
 
