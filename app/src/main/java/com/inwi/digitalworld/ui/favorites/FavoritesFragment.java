@@ -20,7 +20,7 @@ public class FavoritesFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_favorites, container, false);
-        final TextView textView = root.findViewById(R.id.text_favorites);
+        //final TextView textView = root.findViewById(R.id.text_favorites);
 
         return root;
     }
