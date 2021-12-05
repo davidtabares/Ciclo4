@@ -56,11 +56,11 @@ public class DetailProductActivity extends AppCompatActivity {
 
                 if (instock) {
                     tev_detail_stock.setText(getResources().getString(R.string.txt_product_in_stock));
-                    tev_detail_stock.setTextColor(Color.WHITE);
+                    tev_detail_stock.setTextColor(Color.parseColor("#009e0f"));
                 }
                 else {
                     tev_detail_stock.setText(getResources().getString(R.string.txt_product_out_stock));
-                    tev_detail_stock.setTextColor(Color.RED);
+                    tev_detail_stock.setTextColor(Color.parseColor("#20124d"));
                 }
 
                 Glide.with(this)
