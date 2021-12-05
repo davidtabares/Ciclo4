@@ -17,15 +17,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.inwi.digitalworld.database.UserDatabase;
+import com.inwi.digitalworld.database.model.User;
+import com.inwi.digitalworld.util.Constant;
+import com.inwi.digitalworld.util.Utilities;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.inwi.digitalworld.database.UserDatabase;
-import com.inwi.digitalworld.database.model.User;
-import com.inwi.digitalworld.util.Constant;
-import com.inwi.digitalworld.util.Utilities;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -94,7 +97,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 else {
 
-                    loginFirebase(user, password);
+                    loginFirestore(user, Utilities.md5(password));
+                    //loginFirebase(user, password);
                     //new GetUserLoginTask(this, user, Utilities.md5(password));
                     //Toast.makeText(this, getResources().getString(R.string.txt_login_error), Toast.LENGTH_SHORT).show();
                 }
@@ -104,6 +108,39 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivityForResult(intent, ACTIVITY_REGISTER);
                 break;
         }
+    }
+
+    public void loginFirestore(String email, String password) {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("users").document(email);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.e("TAG", "DocumentSnapshot data: " + document.getData());
+
+                        String userPassword = document.getData().get("password").toString();
+
+                        if (password.equals(userPassword)) {
+                            toLogin(email, password);
+                        } else {
+                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.txt_password_error), Toast.LENGTH_SHORT).show();
+                        }
+
+
+                    } else {
+                        Log.e("TAG", "No such document");
+                        Toast.makeText(LoginActivity.this, getResources().getString(R.string.txt_login_wrong), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Log.e("TAG", "get failed with ", task.getException());
+                }
+            }
+        });
+
     }
 
     public void loginFirebase(String user, String password) {

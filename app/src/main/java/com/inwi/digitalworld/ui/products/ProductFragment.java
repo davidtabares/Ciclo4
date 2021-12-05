@@ -9,12 +9,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,7 +52,8 @@ public class ProductFragment extends Fragment {
 
         String[] categories = new String[]{"Home", "Home Basic", "Gamer"};
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item,
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_dropdown_item,
                 categories);
 
         /*spn_categories.setAdapter(adapter);
@@ -67,6 +75,7 @@ public class ProductFragment extends Fragment {
 
         rev_products = root.findViewById(R.id.rev_products);
         rev_products.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //rev_products.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         try {
             JSONArray jsonProducts = new JSONArray(products);
@@ -139,7 +148,7 @@ class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
             else {
                 Glide.with(myActivity)
                         .load(image)
-                        .placeholder(new ColorDrawable(Color.BLACK))
+                        .placeholder(new ColorDrawable(Color.TRANSPARENT))
                         .into(holder.imv_item_product);
             }
 

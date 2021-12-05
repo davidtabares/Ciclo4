@@ -8,6 +8,8 @@
     <string name="txt_sign_up">Sign Up</string>
     <string name="txt_logged">You are logged in</string>
     <string name="txt_login_error">Login error</string>
+    <string name="txt_password_error">Password error</string>
+    <string name="txt_login_wrong">Wrong email or password</string>
 
     <!-- Strings Sign Up -->
     <string name="txt_first_name">First Name</string>
@@ -112,12 +114,19 @@
     </string-array>
 
     <!-- Strings Add_Products_Fragment -->
+    <string name="txt_product_added">Product has been added</string>
+    <string name="txt_product_added_error">An error occurred adding the product</string>
+    <string name="txt_product_select">Select a picture</string>
+    <string name="txt_product_image_error">Image error</string>
+    <string name="txt_product_image_upload">Image Uploaded</string>
+
     <string name="txt_product_name">Product</string>
     <string name="txt_product_name_hint">Product name</string>
     <string name="txt_product_category">Category</string>
     <string name="txt_product_category_hint">Product category</string>
     <string name="txt_product_value">Value</string>
     <string name="txt_product_value_hint">Product value</string>
+    <string name="txt_product_instock">Product in stock?</string>
     <string name="txt_product_image">Image</string>
     <string name="txt_product_image_hint">Type the url of your product photo</string>
     <string name="txt_product_description">Description</string>

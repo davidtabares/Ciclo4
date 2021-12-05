@@ -97,7 +97,7 @@
                 android:id="@+id/textView_terms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                style="@style/MyTextView"
                 android:text="@string/txt_terms" />
 
         </LinearLayout>

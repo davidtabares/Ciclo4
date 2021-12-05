@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        android:visibility="gone"
+        android:src="@drawable/ic_menu_product_add" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

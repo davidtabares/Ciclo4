@@ -16,15 +16,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.inwi.digitalworld.database.UserDatabase;
+import com.inwi.digitalworld.database.model.User;
+import com.inwi.digitalworld.util.Utilities;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.inwi.digitalworld.database.UserDatabase;
-import com.inwi.digitalworld.database.model.User;
-import com.inwi.digitalworld.util.Utilities;
 
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -89,7 +96,17 @@ public class SignUpActivity extends AppCompatActivity {
 
                     //finish();
 
-                    signUpUserFirebase(email, password);
+                    //signUpUserFirebase(email, password);
+
+                    signupUserFirestore(firstName, lastName, email, Utilities.md5(password));
+
+                    edt_first_name.setText("");
+                    edt_last_name.setText("");
+                    edt_email_sign_up.setText("");
+                    edt_password_sign_up.setText("");
+                    chb_terms.setChecked(false);
+
+                    finish();
                 }
             }
         });
@@ -106,6 +123,53 @@ public class SignUpActivity extends AppCompatActivity {
         database = UserDatabase.getInstance(this);
 
         myAuth = FirebaseAuth.getInstance();
+    }
+
+    public void signupUserFirestore(String firstName, String lastName, String email, String password) {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // Create a new user with a first and last name
+        Map<String, Object> user = new HashMap<>();
+        user.put("firstName", firstName);
+        user.put("lastName", lastName);
+        user.put("email", email);
+        user.put("password", password);
+
+/*        //Add a new document with a generated ID
+        db.collection("users")
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
+                        finish();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error adding document", e);
+                    }
+                });*/
+
+        db.collection("users")
+                .document(email)
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.e("TAG", "DocumentSnapshot successfully written!");
+                        finish();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("TAG", "Error writing document", e);
+                    }
+                });
+
     }
 
     public void signUpUserFirebase(String email, String password) {
