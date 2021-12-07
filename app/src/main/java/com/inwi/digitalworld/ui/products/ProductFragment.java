@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -28,6 +29,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.inwi.digitalworld.DetailProductActivity;
 import com.inwi.digitalworld.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,8 +41,8 @@ import org.json.JSONObject;
 
 public class ProductFragment extends Fragment {
 
-    //private TextView tev_product;
-    //private Spinner spn_categories;
+//    private TextView tev_product;
+//    private Spinner spn_categories;
 
     private RecyclerView rev_products;
     private RecyclerView.Adapter myAdapter;
@@ -47,8 +53,8 @@ public class ProductFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_product,container,false);
-        //tev_product = root.findViewById(R.id.tev_product);
-        //spn_categories = root.findViewById(R.id.spn_categories);
+//        tev_product = root.findViewById(R.id.tev_product);
+//        spn_categories = root.findViewById(R.id.spn_categories);
 
         String[] categories = new String[]{"Home", "Home Basic", "Gamer"};
 
@@ -56,7 +62,7 @@ public class ProductFragment extends Fragment {
                 android.R.layout.simple_spinner_dropdown_item,
                 categories);
 
-        /*spn_categories.setAdapter(adapter);
+/*        spn_categories.setAdapter(adapter);
 
         spn_categories.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -80,9 +86,9 @@ public class ProductFragment extends Fragment {
         try {
             JSONArray jsonProducts = new JSONArray(products);
 
-            myAdapter = new ProductsAdapter(jsonProducts, getActivity());
-
-            rev_products.setAdapter(myAdapter);
+//            myAdapter = new ProductsAdapter(jsonProducts, getActivity());
+//
+//            rev_products.setAdapter(myAdapter);
 
             JSONObject product0 = jsonProducts.getJSONObject(0);
 
@@ -100,6 +106,54 @@ public class ProductFragment extends Fragment {
         catch (JSONException e) {
             e.printStackTrace();
         }
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("products")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            JSONArray products = new JSONArray();
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.e("TAG", document.getId() + " => " + document.getData());
+
+                                String name = document.getData().get("name").toString();
+                                String category = document.getData().get("category").toString();
+                                int value = Integer.parseInt(document.getData().get("value").toString());
+                                boolean instock = Boolean.parseBoolean(document.getData().get("instock").toString());
+                                String description = document.getData().get("description").toString();
+                                String image = document.getData().get("image").toString();
+
+                                JSONObject product = new JSONObject();
+                                try {
+                                    product.put("name", name);
+                                    product.put("category", category);
+                                    product.put("value", value);
+                                    product.put("instock", instock);
+                                    product.put("description", description);
+                                    product.put("image", image);
+
+                                    products.put(product);
+                                }
+                                catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+
+                            myAdapter = new ProductsAdapter(products, getActivity());
+
+                            rev_products.setAdapter(myAdapter);
+
+                        }
+                        else {
+                            Log.e("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
 
         return root;
 
@@ -129,11 +183,11 @@ class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
 
         try {
             Log.e("POSITION", "POS: " + position);
-            String name = this.products.getJSONObject(position).getString("name");
-            String category = this.products.getJSONObject(position).getString("category");
-            int value = this.products.getJSONObject(position).getInt("value");
-            String description = this.products.getJSONObject(position).getString("description");
-            String image = this.products.getJSONObject(position).getString("image");
+            String name = products.getJSONObject(position).getString("name");
+            String category = products.getJSONObject(position).getString("category");
+            int value = products.getJSONObject(position).getInt("value");
+            String description = products.getJSONObject(position).getString("description");
+            String image = products.getJSONObject(position).getString("image");
 
             holder.tev_item_name.setText(name);
             holder.tev_item_category.setText(category);
@@ -169,6 +223,18 @@ class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
                 }
             });
 
+            holder.btn_item_favorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        Log.e("PRODUCT_FAVORITE", products.getJSONObject(position).toString());
+                    }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
         }
         catch (JSONException e) {
             holder.tev_item_name.setText("Error");
@@ -188,6 +254,7 @@ class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
         private TextView tev_item_value;
         private TextView tev_item_description;
         private ImageView imv_item_product;
+        private Button btn_item_favorite;
         public ViewHolder(View v) {
             super(v);
             tev_item_name = v.findViewById(R.id.tev_item_name);
@@ -195,6 +262,7 @@ class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
             tev_item_value = v.findViewById(R.id.tev_item_value);
             tev_item_description = v.findViewById(R.id.tev_detail_description);
             imv_item_product = v.findViewById(R.id.imv_item_product);
+            btn_item_favorite = v.findViewById(R.id.btn_item_favorite);
         }
     }
 }
