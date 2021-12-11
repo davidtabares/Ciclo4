@@ -150,6 +150,13 @@
     <string name="txt_favorites">Favorites</string>
     <string name="txt_shopping_cart">Shopping Cart</string>
 
+    <!-- Strings Map -->
+    <string name="txt_my_location">My Location</string>
+    <string name="txt_my_latitude">Latitude: </string>
+    <string name="txt_my_longitude">Longitude: </string>
+    <string name="txt_select_location">Please select location</string>
+    <string name="txt_select_location_add_product">Select location</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_map">MapActivity</string>

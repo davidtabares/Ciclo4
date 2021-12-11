@@ -4,11 +4,16 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +23,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.inwi.digitalworld.MapActivity;
 import com.inwi.digitalworld.util.Constant;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,12 +39,16 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
 import com.inwi.digitalworld.R;
+
 import static android.content.Context.MODE_PRIVATE;
 
 /**
@@ -42,7 +57,6 @@ import static android.content.Context.MODE_PRIVATE;
  * create an instance of this fragment.
  */
 public class AddProductFragment extends Fragment {
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -59,11 +73,32 @@ public class AddProductFragment extends Fragment {
     private Button btn_product_image_upload;
     private Button btn_product_image_take;
     private ImageView imv_product_image;
+    private Button btn_product_location;
+    private TextView tev_product_location;
     private Button btn_add_product;
+
     final int OPEN_GALLERY = 1;
+    final int OPEN_MAP = 2;
+
     Uri data1;
     String urlImage;
+
     private SharedPreferences myPreferences;
+
+    Double latitude;
+    Double longitude;
+
+    //Method takeImage
+    private static final String rootMain = "myImagesApp/";
+    private static final String folderImage = "images";
+    private static final String dirImage = rootMain + folderImage;
+    private String path;
+    File fileImage;
+    Bitmap bitmap;
+    final int OPEN_CAMERA = 3;
+
+    private GoogleMap mMap;
+
     public AddProductFragment() {
         // Required empty public constructor
     }
@@ -106,16 +141,21 @@ public class AddProductFragment extends Fragment {
         btn_product_image_upload = root.findViewById(R.id.btn_product_image_upload);
         btn_product_image_take = root.findViewById(R.id.btn_product_image_take);
         imv_product_image = root.findViewById(R.id.imv_product_image);
+        btn_product_location = root.findViewById(R.id.btn_product_location);
+        tev_product_location = root.findViewById(R.id.tev_product_location);
         btn_add_product = root.findViewById(R.id.btn_add_product);
+
         btn_add_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
+
                 String name = edt_product_name.getText().toString();
-                String category =  edt_product_category.getText().toString();
+                String category = edt_product_category.getText().toString();
                 int value = Integer.parseInt(edt_product_value.getText().toString());
-                String description =  edt_product_description.getText().toString();
+                String description = edt_product_description.getText().toString();
                 boolean instock = chb_product_instock.isChecked();
+
                 Map<String, Object> product = new HashMap<>();
                 product.put("name", name);
                 product.put("category", category);
@@ -123,6 +163,9 @@ public class AddProductFragment extends Fragment {
                 product.put("description", description);
                 product.put("instock", instock);
                 product.put("image", urlImage);
+                product.put("latitude", latitude);
+                product.put("longitude", longitude);
+
                 // Add a new document with a generated ID
                 db.collection("products")
                         .add(product)
@@ -136,7 +179,6 @@ public class AddProductFragment extends Fragment {
                                 edt_product_value.setText("");
                                 edt_product_description.setText("");
                                 chb_product_instock.setChecked(false);
-
                                 imv_product_image.setImageDrawable(getActivity().getDrawable(R.drawable.ic_default_image));
                             }
                         })
@@ -161,28 +203,79 @@ public class AddProductFragment extends Fragment {
         btn_product_image_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 uploadImage();
             }
         });
+
+        btn_product_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MapActivity.class);
+                startActivityForResult(intent, OPEN_MAP);
+            }
+        });
+
+        btn_product_image_take.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Tomar foto", Toast.LENGTH_SHORT).show();
+                takeImage();
+            }
+        });
+
         return root;
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == OPEN_GALLERY) {
             if (resultCode == Activity.RESULT_OK) {
                 data1 = data.getData();
+
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data1);
+                    bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data1);
                     imv_product_image.setImageBitmap(bitmap);
-                } catch (IOException e) {
+                }
+                catch (IOException e) {
                     e.printStackTrace();
                 }
-            } else {
+
+            }
+            else {
                 Toast.makeText(getActivity(), getResources().getString(R.string.txt_product_image_error), Toast.LENGTH_SHORT).show();
             }
         }
+        else if (requestCode == OPEN_MAP) {
+            if (resultCode == Activity.RESULT_OK) {
+                latitude = data.getDoubleExtra("latitude", 0);
+                longitude = data.getDoubleExtra("longitude", 0);
+
+                tev_product_location.setText(getResources().getString(R.string.txt_my_latitude) + " " + latitude + "\n" + getResources().getString(R.string.txt_my_longitude) + " " + longitude);
+
+//                LatLng myLocation = new LatLng(latitude, longitude);
+//                mMap.addMarker(new MarkerOptions().position(myLocation).title(getResources().getString(R.string.txt_my_location)).snippet("Population: 4,137,400"));
+
+            }
+        }
+        else if (requestCode == OPEN_CAMERA) {
+            if (resultCode == Activity.RESULT_OK) {
+                MediaScannerConnection.scanFile(getContext(), new String[]{path}, null,
+                        new MediaScannerConnection.OnScanCompletedListener() {
+                            @Override
+                            public void onScanCompleted(String path, Uri uri) {
+                                Log.i("Path", "" + path);
+                            }
+                        });
+
+                bitmap = BitmapFactory.decodeFile(path);
+                imv_product_image.setImageBitmap(bitmap);
+            }
+        }
+
     }
+
     public void uploadImage() {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
@@ -192,7 +285,6 @@ public class AddProductFragment extends Fragment {
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setTitle(getResources().getString(R.string.txt_product_image_uploading));
             progressDialog.show();
-
             Calendar c = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
             String strDate = sdf.format(c.getTime());
@@ -247,5 +339,32 @@ public class AddProductFragment extends Fragment {
         else {
             //you can display an error toast
         }
+
     }
+
+    public void takeImage() {
+
+        File myFile = new File(Environment.getExternalStorageDirectory(), dirImage);
+        boolean isCreated = myFile.exists();
+
+        if (isCreated == false) {
+            isCreated = myFile.mkdirs();
+        }
+
+        if (isCreated == true) {
+            Long consecutive = System.currentTimeMillis() / 1000;
+            String nameImage = consecutive.toString() + ".jpg";
+
+            path = Environment.getExternalStorageDirectory() + File.separator + dirImage +
+                    File.separator + nameImage;
+
+            fileImage = new File(path);
+
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(fileImage));
+            startActivityForResult(intent, OPEN_CAMERA);
+        }
+
+    }
+
 }

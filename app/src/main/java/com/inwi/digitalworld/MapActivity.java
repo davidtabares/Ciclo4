@@ -1,9 +1,21 @@
 package com.inwi.digitalworld;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -12,10 +24,17 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+
+    private Double latitude;
+    private Double longitude;
+
+    private FusedLocationProviderClient fusedLocationClient;
+    private Button btn_accept_location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +44,33 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        btn_accept_location = findViewById(R.id.btn_accept_location);
+
+        btn_accept_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (latitude != null && longitude != null) {
+
+                    Intent intent = new Intent();
+                    intent.putExtra("latitude", latitude);
+                    intent.putExtra("longitude", longitude);
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                }
+                else {
+                    Toast.makeText(MapActivity.this, getResources().getString(R.string.txt_select_location), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 123);
+        }
+
     }
 
     /**
@@ -42,19 +88,15 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mMap.getUiSettings().setZoomControlsEnabled(true);
         //mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
         // Add a marker in Sydney and move the camera
-        LatLng manizales = new LatLng(5.0686966, -75.5186627);
+
+/*        LatLng manizales = new LatLng(5.0686966, -75.5186627);
         mMap.addMarker(new MarkerOptions().position(manizales).title("Manizales").snippet("Population: 4,137,400"));
-
-
 // Move the camera instantly to Sydney with a zoom of 15.
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(manizales, 15));
-
 // Zoom in, animating the camera.
         mMap.animateCamera(CameraUpdateFactory.zoomIn());
-
 // Zoom out to zoom level 10, animating with a duration of 2 seconds.
         mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
-
 // Construct a CameraPosition focusing on Mountain View and animate the camera to that position.
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(manizales )      // Sets the center of the map to Mountain View
@@ -62,6 +104,63 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 //.bearing(90)                // Sets the orientation of the camera to east
                 //.tilt(30)                   // Sets the tilt of the camera to 30 degrees
                 .build();                   // Creates a CameraPosition from the builder
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));*/
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            // Logic to handle location object
+                            LatLng myLocation = new LatLng(location.getLatitude(), location.getLongitude());
+
+                            // Move the camera instantly to Sydney with a zoom of 15.
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 15));
+
+                            // Zoom in, animating the camera.
+                            mMap.animateCamera(CameraUpdateFactory.zoomIn());
+
+                            // Zoom out to zoom level 10, animating with a duration of 2 seconds.
+                            mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+
+                            // Construct a CameraPosition focusing on Mountain View and animate the camera to that position.
+                            CameraPosition cameraPosition = new CameraPosition.Builder()
+                                    .target(myLocation)      // Sets the center of the map to Mountain View
+                                    .zoom(17)                   // Sets the zoom
+                                    //.bearing(90)                // Sets the orientation of the camera to east
+                                    //.tilt(30)                   // Sets the tilt of the camera to 30 degrees
+                                    .build();                   // Creates a CameraPosition from the builder
+                            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+
+                        }
+                    }
+                });
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(@NonNull LatLng latLng) {
+                mMap.clear();
+                latitude = latLng.latitude;
+                longitude = latLng.longitude;
+                btn_accept_location.setEnabled(true);
+                mMap.addMarker(new MarkerOptions().position(latLng).title("My Location"));
+
+            }
+        });
+
     }
 }
