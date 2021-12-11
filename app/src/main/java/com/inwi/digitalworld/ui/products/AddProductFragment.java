@@ -1,4 +1,5 @@
 package com.inwi.digitalworld.ui.products;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -57,13 +58,16 @@ import static android.content.Context.MODE_PRIVATE;
  * create an instance of this fragment.
  */
 public class AddProductFragment extends Fragment {
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
     private EditText edt_product_name;
     private EditText edt_product_category;
     private EditText edt_product_value;
@@ -102,6 +106,7 @@ public class AddProductFragment extends Fragment {
     public AddProductFragment() {
         // Required empty public constructor
     }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -119,6 +124,7 @@ public class AddProductFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,11 +133,13 @@ public class AddProductFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_add_product, container, false);
+
         edt_product_name = root.findViewById(R.id.edt_product_name);
         edt_product_category = root.findViewById(R.id.edt_product_category);
         edt_product_value = root.findViewById(R.id.edt_product_value);
@@ -174,11 +182,13 @@ public class AddProductFragment extends Fragment {
                             public void onSuccess(DocumentReference documentReference) {
                                 Log.e("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
                                 Toast.makeText(getActivity(), getResources().getString(R.string.txt_product_added), Toast.LENGTH_SHORT).show();
+
                                 edt_product_name.setText("");
                                 edt_product_category.setText("");
                                 edt_product_value.setText("");
                                 edt_product_description.setText("");
                                 chb_product_instock.setChecked(false);
+
                                 imv_product_image.setImageDrawable(getActivity().getDrawable(R.drawable.ic_default_image));
                             }
                         })
@@ -191,15 +201,18 @@ public class AddProductFragment extends Fragment {
                         });
             }
         });
+
         btn_product_image_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
+
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.txt_product_select)), OPEN_GALLERY);
             }
         });
+
         btn_product_image_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -230,8 +243,10 @@ public class AddProductFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == OPEN_GALLERY) {
             if (resultCode == Activity.RESULT_OK) {
+
                 data1 = data.getData();
 
                 try {
@@ -245,18 +260,6 @@ public class AddProductFragment extends Fragment {
             }
             else {
                 Toast.makeText(getActivity(), getResources().getString(R.string.txt_product_image_error), Toast.LENGTH_SHORT).show();
-            }
-        }
-        else if (requestCode == OPEN_MAP) {
-            if (resultCode == Activity.RESULT_OK) {
-                latitude = data.getDoubleExtra("latitude", 0);
-                longitude = data.getDoubleExtra("longitude", 0);
-
-                tev_product_location.setText(getResources().getString(R.string.txt_my_latitude) + " " + latitude + "\n" + getResources().getString(R.string.txt_my_longitude) + " " + longitude);
-
-//                LatLng myLocation = new LatLng(latitude, longitude);
-//                mMap.addMarker(new MarkerOptions().position(myLocation).title(getResources().getString(R.string.txt_my_location)).snippet("Population: 4,137,400"));
-
             }
         }
         else if (requestCode == OPEN_CAMERA) {
@@ -273,10 +276,23 @@ public class AddProductFragment extends Fragment {
                 imv_product_image.setImageBitmap(bitmap);
             }
         }
+        else if (requestCode == OPEN_MAP) {
+            if (resultCode == Activity.RESULT_OK) {
+                latitude = data.getDoubleExtra("latitude", 0);
+                longitude = data.getDoubleExtra("longitude", 0);
+
+                tev_product_location.setText(getResources().getString(R.string.txt_my_latitude) + " " + latitude + "\n" + getResources().getString(R.string.txt_my_longitude) + " " + longitude);
+
+//                LatLng myLocation = new LatLng(latitude, longitude);
+//                mMap.addMarker(new MarkerOptions().position(myLocation).title(getResources().getString(R.string.txt_my_location)).snippet("Population: 4,137,400"));
+
+            }
+        }
 
     }
 
     public void uploadImage() {
+
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
         //if there is a file to upload
@@ -285,12 +301,17 @@ public class AddProductFragment extends Fragment {
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setTitle(getResources().getString(R.string.txt_product_image_uploading));
             progressDialog.show();
+
             Calendar c = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
             String strDate = sdf.format(c.getTime());
             String nameImage = strDate + ".jpg";
+
             myPreferences = getActivity().getSharedPreferences(Constant.PREFERENCE, MODE_PRIVATE);
+
             String user = myPreferences.getString("user", "NO USER");
+
+
             StorageReference riversRef = storageReference.child(user + "/" + nameImage);
             riversRef.putFile(data1)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -299,8 +320,10 @@ public class AddProductFragment extends Fragment {
                             //if the upload is successfull
                             //hiding the progress dialog
                             progressDialog.dismiss();
+
                             //and displaying a success toast
                             Toast.makeText(getActivity(), getResources().getString(R.string.txt_product_image_upload), Toast.LENGTH_LONG).show();
+
                             riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
@@ -313,6 +336,7 @@ public class AddProductFragment extends Fragment {
                                     // Handle any errors
                                 }
                             });
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -321,6 +345,7 @@ public class AddProductFragment extends Fragment {
                             //if the upload is not successfull
                             //hiding the progress dialog
                             progressDialog.dismiss();
+
                             //and displaying error message
                             Toast.makeText(getActivity(), exception.getMessage(), Toast.LENGTH_LONG).show();
                         }
@@ -330,6 +355,7 @@ public class AddProductFragment extends Fragment {
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                             //calculating progress percentage
                             double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+
                             //displaying percentage in progress dialog
                             progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
                         }
