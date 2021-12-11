@@ -202,7 +202,7 @@ class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
             else {
                 Glide.with(myActivity)
                         .load(image)
-                        .placeholder(new ColorDrawable(Color.TRANSPARENT))
+                        .placeholder(new ColorDrawable(Color.LTGRAY))
                         .into(holder.imv_item_product);
             }
 

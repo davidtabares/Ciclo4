@@ -154,7 +154,7 @@ public class MenuActivity extends AppCompatActivity {
 
         Glide.with(myActivity)
                 .load(image)
-                .placeholder(new ColorDrawable(Color.BLACK))
+                .placeholder(new ColorDrawable(Color.LTGRAY))
                 .into(navImage);
 
         navName.setText(firstName);
