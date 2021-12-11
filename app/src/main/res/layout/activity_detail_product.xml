@@ -9,66 +9,73 @@
     android:orientation="vertical"
     tools:context=".DetailProductActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="30dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent" >
 
-        <TextView
-            style="@style/MyTextView"
-            android:id="@+id/tev_detail_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nombre"
-            android:textSize="35dp"
-            android:layout_gravity="center"/>
-
-        <ImageView
-            android:id="@+id/imv_detail_image"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_gravity="center"
-            android:src="@drawable/digital_world"/>
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="30dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tev_detail_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/MyTextView"
-            android:text="Categoría"
-            android:textSize="20dp"
-            android:layout_gravity="center"/>
+            <TextView
+                style="@style/MyTextView"
+                android:id="@+id/tev_detail_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre"
+                android:textSize="35dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"/>
 
-        <TextView
-            android:id="@+id/tev_detail_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/MyTextView"
-            android:text="Precio"
-            android:textSize="20dp"
-            android:layout_gravity="center"/>
+            <ImageView
+                android:id="@+id/imv_detail_image"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_gravity="center"
+                android:src="@drawable/digital_world"
+                android:layout_marginVertical="10dp"/>
 
-        <TextView
-            android:id="@+id/tev_detail_stock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/MyTextView"
-            android:text="Disponible"
-            android:textSize="20dp"
-            android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tev_detail_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/MyTextView"
+                android:text="Categoría"
+                android:textSize="20dp"
+                android:layout_gravity="center"/>
 
-        <com.codesgood.views.JustifiedTextView
-            android:id="@+id/tev_detail_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autoSizeTextType="uniform"
-            style="@style/MyTextView"
-            android:text="Producto de tecnología"
-            android:textSize="20dp"
-            android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tev_detail_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/MyTextView"
+                android:text="Precio"
+                android:textSize="20dp"
+                android:layout_gravity="center"/>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tev_detail_stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/MyTextView"
+                android:text="Disponible"
+                android:textSize="20dp"
+                android:layout_gravity="center"/>
 
+            <com.codesgood.views.JustifiedTextView
+                android:id="@+id/tev_detail_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoSizeTextType="uniform"
+                style="@style/MyTextView"
+                android:text="Producto de tecnología"
+                android:textSize="20dp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
