@@ -113,6 +113,9 @@
         <item>Gamer</item>
     </string-array>
 
+    <string name="txt_product_favorite_add">Product added to favorites</string>
+    <string name="txt_product_cart_add">Product added to cart</string>
+
     <!-- Strings Add_Products_Fragment -->
     <string name="txt_product_added">Product has been added</string>
     <string name="txt_product_added_error">An error occurred adding the product</string>

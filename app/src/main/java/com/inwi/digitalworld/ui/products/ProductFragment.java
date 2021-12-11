@@ -228,10 +228,25 @@ class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
                 public void onClick(View v) {
                     try {
                         Log.e("PRODUCT_FAVORITE", products.getJSONObject(position).toString());
+                        Toast.makeText(myActivity, myActivity.getString(R.string.txt_product_favorite_add), Toast.LENGTH_SHORT).show();
                     }
                     catch (JSONException e) {
                         e.printStackTrace();
                     }
+                }
+            });
+
+            holder.btn_item_shopping_cart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        Log.e("PRODUCT_SHOPPING_CART", products.getJSONObject(position).toString());
+                        Toast.makeText(myActivity, myActivity.getResources().getString(R.string.txt_product_cart_add), Toast.LENGTH_SHORT).show();
+                    }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                 }
             });
 
@@ -255,6 +270,8 @@ class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
         private TextView tev_item_description;
         private ImageView imv_item_product;
         private Button btn_item_favorite;
+        private Button btn_item_shopping_cart;
+
         public ViewHolder(View v) {
             super(v);
             tev_item_name = v.findViewById(R.id.tev_item_name);
@@ -263,6 +280,8 @@ class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
             tev_item_description = v.findViewById(R.id.tev_detail_description);
             imv_item_product = v.findViewById(R.id.imv_item_product);
             btn_item_favorite = v.findViewById(R.id.btn_item_favorite);
+            btn_item_shopping_cart = v.findViewById(R.id.btn_item_shopping_cart);
+
         }
     }
 }
